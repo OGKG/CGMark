@@ -1,0 +1,3 @@
+class TaskStage:
+    description = ""
+    items = []
