@@ -23,7 +23,7 @@ class GrahamItemOrderedList(TaskItem):
 
 class GrahamStageOrderedList(TaskStage):
     description = "Використовуючи q як початок координат, побудувати упорядкований за полярним кутом список точок множини S, починаючи із точки \"початок\" проти годинникової стрілки."
-    items = []
+    items = [GrahamItemOrderedList]
 
 
 class GrahamItemStartingPoint(TaskItem):
@@ -34,7 +34,7 @@ class GrahamItemStartingPoint(TaskItem):
 
 class GrahamStageStartingPoint(TaskStage):
     description = "Знайти точку \"початок\"."
-    items = []
+    items = [GrahamItemStartingPoint]
 
 
 class GrahamItemPointTriplesLookup(TaskItem):
