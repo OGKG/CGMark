@@ -1,12 +1,12 @@
-from typing import Any
-from taskstage import TaskStage
-from taskitem import TaskItem
+from typing import Any, Callable
+from base import TaskStage
+from base import TaskItem
 
 
 class Task:
     description: str = ""
     stages: list[TaskStage] = []
-    solution_method: function = None
+    solution_method: Callable = None
 
     def __init__(self, condition: Any):
         self.condition = condition
