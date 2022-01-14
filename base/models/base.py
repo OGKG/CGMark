@@ -20,8 +20,8 @@ class TableRow(BaseModel):
 
 
 class Table(BaseModel):
-    rows: list[TableRow] = []
+    rows: Iterable[TableRow] = []
     
 
 class HeaderTable(Table):
-    headers = list[str]
+    headers = Iterable[str]
