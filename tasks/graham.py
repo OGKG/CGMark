@@ -37,44 +37,14 @@ class GrahamStageStartingPoint(TaskStage):
     items = [GrahamItemStartingPoint]
 
 
-class GrahamItemPointTriplesLookup(TaskItem):
-    description = "Починаючи з точки \"початок\", розглядаємо трійки сусідніх точок."
+class GrahamItemLookup(TaskItem):
+    description = "Організувати обхід."
     solution_method = graham
-    max_mark = 0.15
 
-
-class GrahamItemAngleCheck(TaskItem):
-    description = "Перевіряємо внутрішній кут по відношенню до q, який утворює трійка."
-    solution_method = graham
-    max_mark = 0.15
-
-
-class GrahamItemAngleLessThanPi(TaskItem):
-    description = "Якщо кут менше ПІ - просуваємось вперед по списку на точку (яка перевірялася на на крайність)."
-    solution_method = graham
-    max_mark = 0.25
-
-
-class GrahamItemAngleIsPiOrGreater(TaskItem):
-    description = "Якщо кут більше або дорівнює ПІ - вилучаємо середню точку трійки і повертаємось на точку назад по списку."
-    solution_method = graham
-    max_mark = 0.6
-
-
-class GrahamItemStartingPointReached(TaskItem):
-    description = "При досягненні точки \"початок\" третьою точкою трійки перевіряємо кут, якщо він менше ПІ, зупиняємося, інакше повертаємось на точку назад по списку."
-    solution_method = graham
-    max_mark = 0.1
 
 class GrahamStageLookup(TaskStage):
-    description = "Організувати обход."
-    items = [
-        GrahamItemPointTriplesLookup,
-        GrahamItemAngleCheck,
-        GrahamItemAngleLessThanPi,
-        GrahamItemAngleIsPiOrGreater,
-        GrahamItemStartingPointReached
-    ]
+    description = "Організувати обхід."
+    items = [GrahamItemLookup]
 
 
 class GrahamTask(Task):
