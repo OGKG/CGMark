@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Any, Iterable
+from typing import Any
 
 
 class Point(BaseModel):
@@ -16,12 +16,12 @@ class TableCell(BaseModel):
 
 
 class TableRow(BaseModel):
-    cells: Iterable[TableCell] = []
+    cells: list[TableCell] = []
 
 
 class Table(BaseModel):
-    rows: Iterable[TableRow] = []
+    rows: list[TableRow] = []
     
 
 class HeaderTable(Table):
-    headers = Iterable[str]
+    headers: list[str] = []

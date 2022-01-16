@@ -1,4 +1,4 @@
-from .base import Point, HeaderTable, TableCell, TableRow
+from base import Point, HeaderTable, TableCell, TableRow
 from enum import Enum, auto
 
 class GrahamPoint(Point):
