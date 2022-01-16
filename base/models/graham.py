@@ -1,7 +1,12 @@
-from base import Point, HeaderTable, TableCell, TableRow
+from base import Point, HeaderTable, TableCell, TableRow, PointList
 from enum import Enum, auto
 
+
 class GrahamPoint(Point):
+    pass
+
+
+class GrahamPointList(PointList):
     pass
 
 
