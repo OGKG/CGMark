@@ -1,4 +1,4 @@
-from base import Point, HeaderTable, TableCell, TableRow, PointList
+from base.models.base import Point, HeaderTable, TableCell, TableRow, PointList
 from enum import Enum, auto
 
 
@@ -28,8 +28,8 @@ class GrahamCenterPointCell(TableCell):
 
 
 class ToAdd(Enum):
-    yes: auto()
-    no: auto()
+    yes = auto()
+    no = auto()
 
 
 class GrahamToAddCell(TableCell):

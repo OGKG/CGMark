@@ -29,20 +29,20 @@ class TestGrahamTask(TestCase):
     def test_init(self):
         task = GrahamTask([Point(6,4), Point(4,2), Point(4,0), Point(1,0), Point(3,2), Point(2,4)])
         
-        centroid = Point(4.666666666666667, 2.0)
+        internal_point = Point(4.666666666666667, 2.0)
         ordered = [Point(1, 0), Point(4, 0), Point(6, 4), Point(2, 4), Point(4, 2), Point(3, 2)]
         origin = Point(1, 0)
         steps = [
-            ([0, 1, 2], True),
-            ([1, 2, 3], True),
-            ([2, 3, 4], True),
-            ([3, 4, 5], False),
-            ([2, 3, 5], True),
-            ([3, 5, 0], False),
-            ([2, 3, 0], True)
+            ([ordered[0], ordered[1], ordered[2]], True),
+            ([ordered[1], ordered[2], ordered[3]], True),
+            ([ordered[2], ordered[3], ordered[4]], True),
+            ([ordered[3], ordered[4], ordered[5]], False),
+            ([ordered[2], ordered[3], ordered[5]], True),
+            ([ordered[3], ordered[5], ordered[0]], False),
+            ([ordered[2], ordered[3], ordered[0]], True)
         ]
 
-        self.assertAlmostEqual(task.stages[0].items[0].answer, centroid)
+        self.assertAlmostEqual(task.stages[0].items[0].answer, internal_point)
         self.assertEqual(task.stages[1].items[0].answer, ordered)
         self.assertEqual(task.stages[2].items[0].answer, origin)
         self.assertEqual(task.stages[3].items[0].answer, steps)

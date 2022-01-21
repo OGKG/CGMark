@@ -29,15 +29,15 @@ class GrahamStageOrderedList(TaskStage):
     items = [GrahamItemOrderedList]
 
 
-class GrahamItemStartingPoint(TaskItem):
+class GrahamItemOriginPoint(TaskItem):
     description = "Знайти точку \"початок\"."
     solution_method = graham
     max_mark = 0.25
     data_model = models.GrahamPoint    
 
-class GrahamStageStartingPoint(TaskStage):
+class GrahamStageOriginPoint(TaskStage):
     description = "Знайти точку \"початок\"."
-    items = [GrahamItemStartingPoint]
+    items = [GrahamItemOriginPoint]
 
 
 class GrahamItemLookup(TaskItem):
@@ -56,6 +56,7 @@ class GrahamTask(Task):
     stages = [
         GrahamStageInternalPoint,
         GrahamStageOrderedList,
-        GrahamStageStartingPoint,
+        GrahamStageOriginPoint,
         GrahamStageLookup
     ]
+    solution_method = graham
