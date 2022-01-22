@@ -9,9 +9,8 @@ class ModelBuilder:
     def _build_methods(self):
         pass
 
-    def build(self):
-        k = 0
-        for i, stage in enumerate(self.task.stages):
-            for j, item in enumerate(stage.items):
-                self.task.stages[i].items[j].answer = self._build_methods[k](item.answer)
-                k += 1
+    def build(self) -> None:
+        pairs = zip(self._build_methods, self.task.get_items())
+        data_model_answers = [build_item(item.answer) for build_item, item in pairs]
+        for item, new_answer in zip(self.task.get_items(), data_model_answers):
+            item.answer = new_answer

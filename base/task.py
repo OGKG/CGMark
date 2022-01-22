@@ -18,4 +18,4 @@ class Task:
         ]
 
     def get_items(self) -> list[TaskItem]:
-        return [item for stage in self.stages for item in stage]
+        return [item for stage in self.stages for item in stage.items]
