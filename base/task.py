@@ -7,10 +7,12 @@ class Task:
     description: str = ""
     stages: list[TaskStage] = []
     solution_method: Callable = None
+    item_answer_builder = None
 
     def __init__(self, condition: Any):
         self.condition = condition
-        answers = self.__class__.solution_method(condition)
+        raw_answers = self.__class__.solution_method(condition)
+        answers = self.item_answer_builder.build(raw_answers)
         self.stages = [
             stage_class(answers) 
             for stage_class

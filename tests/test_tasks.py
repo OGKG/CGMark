@@ -1,47 +1,68 @@
 from unittest import TestCase
-from base.task import Task
-from base.taskstage import TaskStage
-from base.taskitem import TaskItem
-from CGLib.models import Point
+from CGLib.models.point import Point
+from base.models.graham import GrahamCenterPointCell, GrahamPiCompareCell, GrahamPoint, GrahamPointList, GrahamTable, GrahamTableRow, GrahamToAddCell, GrahamTrinityCell, PiCompare, ToAdd
+from builders.graham import GrahamModelBuilder
 from tasks.graham import GrahamTask
 
 
-class TestTaskItem(TaskItem):
-    max_mark = 1
-
-
-class TestTaskStage(TaskStage):
-    items = [TestTaskItem, TestTaskItem]
-
-
-class TestTask(Task):
-    stages = [TestTaskStage, TestTaskStage]
-    solution_method = lambda x: (i for i in x)
-
-
-class TestTasks(TestCase):
-    def test_init(self):
-        t = TestTask(i for i in range(4))
-        self.assertEqual(t.stages[0].items[1].answer, 1)
-
-
-class TestGrahamTask(TestCase):
+class TestGrahamBuilder(TestCase):
     def test_init(self):
         task = GrahamTask([Point(6,4), Point(4,2), Point(4,0), Point(1,0), Point(3,2), Point(2,4)])
+        internal_point = GrahamPoint(x=4.666666666666667, y=2.0)
+        ordered = GrahamPointList(points=[
+            GrahamPoint(x=1, y=0),
+            GrahamPoint(x=4, y=0),
+            GrahamPoint(x=6, y=4),
+            GrahamPoint(x=2, y=4),
+            GrahamPoint(x=4, y=2),
+            GrahamPoint(x=3, y=2)
+        ])
+        origin = GrahamPoint(x=1, y=0)
+        steps = GrahamTable(rows=[
+            GrahamTableRow(cells=(
+                GrahamTrinityCell(content=(ordered.points[0], ordered.points[1], ordered.points[2])),
+                GrahamPiCompareCell(content=PiCompare.less),
+                GrahamCenterPointCell(content=ordered.points[1]),
+                GrahamToAddCell(content=ToAdd.yes)
+            )),
+            GrahamTableRow(cells=(
+                GrahamTrinityCell(content=(ordered.points[1], ordered.points[2], ordered.points[3])),
+                GrahamPiCompareCell(content=PiCompare.less),
+                GrahamCenterPointCell(content=ordered.points[2]),
+                GrahamToAddCell(content=ToAdd.yes)
+            )),
+            GrahamTableRow(cells=(
+                GrahamTrinityCell(content=(ordered.points[2], ordered.points[3], ordered.points[4])),
+                GrahamPiCompareCell(content=PiCompare.less),
+                GrahamCenterPointCell(content=ordered.points[3]),
+                GrahamToAddCell(content=ToAdd.yes)
+            )),
+            GrahamTableRow(cells=(
+                GrahamTrinityCell(content=(ordered.points[3], ordered.points[4], ordered.points[5])),
+                GrahamPiCompareCell(content=PiCompare.more),
+                GrahamCenterPointCell(content=ordered.points[4]),
+                GrahamToAddCell(content=ToAdd.no)
+            )),
+            GrahamTableRow(cells=(
+                GrahamTrinityCell(content=(ordered.points[2], ordered.points[3], ordered.points[5])),
+                GrahamPiCompareCell(content=PiCompare.less),
+                GrahamCenterPointCell(content=ordered.points[3]),
+                GrahamToAddCell(content=ToAdd.yes)
+            )),
+            GrahamTableRow(cells=(
+                GrahamTrinityCell(content=(ordered.points[3], ordered.points[5], ordered.points[0])),
+                GrahamPiCompareCell(content=PiCompare.more),
+                GrahamCenterPointCell(content=ordered.points[5]),
+                GrahamToAddCell(content=ToAdd.no)
+            )),
+            GrahamTableRow(cells=(
+                GrahamTrinityCell(content=(ordered.points[2], ordered.points[3], ordered.points[0])),
+                GrahamPiCompareCell(content=PiCompare.less),
+                GrahamCenterPointCell(content=ordered.points[3]),
+                GrahamToAddCell(content=ToAdd.yes)
+            )),
+        ])
         
-        internal_point = Point(4.666666666666667, 2.0)
-        ordered = [Point(1, 0), Point(4, 0), Point(6, 4), Point(2, 4), Point(4, 2), Point(3, 2)]
-        origin = Point(1, 0)
-        steps = [
-            ([ordered[0], ordered[1], ordered[2]], True),
-            ([ordered[1], ordered[2], ordered[3]], True),
-            ([ordered[2], ordered[3], ordered[4]], True),
-            ([ordered[3], ordered[4], ordered[5]], False),
-            ([ordered[2], ordered[3], ordered[5]], True),
-            ([ordered[3], ordered[5], ordered[0]], False),
-            ([ordered[2], ordered[3], ordered[0]], True)
-        ]
-
         self.assertAlmostEqual(task.stages[0].items[0].answer, internal_point)
         self.assertEqual(task.stages[1].items[0].answer, ordered)
         self.assertEqual(task.stages[2].items[0].answer, origin)

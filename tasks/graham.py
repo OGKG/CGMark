@@ -3,6 +3,7 @@ from CGLib.algo.graham import graham
 from base.task import Task
 from base.taskstage import TaskStage
 from base.taskitem import TaskItem
+from builders.graham import GrahamModelBuilder
 
 
 class GrahamItemInternalPoint(TaskItem):
@@ -52,6 +53,7 @@ class GrahamStageLookup(TaskStage):
 
 
 class GrahamTask(Task):
+    item_answer_builder = GrahamModelBuilder
     description = "Метод Грехема"
     stages = [
         GrahamStageInternalPoint,

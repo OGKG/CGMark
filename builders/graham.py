@@ -3,25 +3,30 @@ from base.models.graham import GrahamCenterPointCell, GrahamPiCompareCell, Graha
 
 
 class GrahamModelBuilder(ModelBuilder):
-    @property
-    def _build_methods(self):
-        return [
-            self._build_internal_point,
-            self._build_ordered,
-            self._build_origin,
-            self._build_steps_table
-        ]
     
-    def _build_internal_point(self, answer):
+    @classmethod
+    def _build_methods(cls):
+        return [
+            cls._build_internal_point,
+            cls._build_ordered,
+            cls._build_origin,
+            cls._build_steps_table
+        ]
+
+    @staticmethod
+    def _build_internal_point(answer):
         return GrahamPoint(x=answer.x, y=answer.y)
     
-    def _build_ordered(self, answer):
+    @staticmethod
+    def _build_ordered(answer):
         return GrahamPointList(points=[GrahamPoint(x=p.x, y=p.y) for p in answer])
     
-    def _build_origin(self, answer):
+    @staticmethod
+    def _build_origin(answer):
         return GrahamPoint(x=answer.x, y=answer.y)
-    
-    def _build_steps_table(self, answer):
+
+    @staticmethod
+    def _build_steps_table(answer):
         pi_compare = lambda x: PiCompare.less if x else PiCompare.more
         to_add = lambda x: ToAdd.yes if x else ToAdd.no
         rows = [
