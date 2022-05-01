@@ -1,13 +1,20 @@
 from unittest import TestCase
 from CGLib.models.point import Point
+from base.models.condition import PointListCondition
 from base.models.graham import GrahamCenterPointCell, GrahamPiCompareCell, GrahamPoint, GrahamPointList, GrahamTable, GrahamTableRow, GrahamToAddCell, GrahamTrinityCell, PiCompare, ToAdd
-from builders.graham import GrahamModelBuilder
 from tasks.graham import GrahamTask
 
 
 class TestGrahamBuilder(TestCase):
     def test_init(self):
-        task = GrahamTask([Point(6,4), Point(4,2), Point(4,0), Point(1,0), Point(3,2), Point(2,4)])
+        task = GrahamTask(PointListCondition(point_list=[
+            Point(6,4),
+            Point(4,2),
+            Point(4,0),
+            Point(1,0),
+            Point(3,2),
+            Point(2,4)
+        ]))
         internal_point = GrahamPoint(x=4.666666666666667, y=2.0)
         ordered = GrahamPointList(points=[
             GrahamPoint(x=1, y=0),

@@ -62,3 +62,7 @@ class GrahamTask(Task):
         GrahamStageLookup
     ]
     solution_method = graham
+
+    @property
+    def unwrapped_condition(self):
+        return [self.condition.point_list]

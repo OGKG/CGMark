@@ -1,6 +1,7 @@
-from typing import Any, Callable
+from typing import Callable
 from base import TaskStage
 from base import TaskItem
+from base.models.condition import Condition
 
 
 class Task:
@@ -9,9 +10,9 @@ class Task:
     solution_method: Callable = None
     item_answer_builder = None
 
-    def __init__(self, condition: Any):
+    def __init__(self, condition: Condition):
         self.condition = condition
-        raw_answers = self.__class__.solution_method(condition)
+        raw_answers = self.__class__.solution_method(*self.unwrapped_condition)
         answers = self.item_answer_builder.build(raw_answers)
         self.stages = [
             stage_class(answers) 

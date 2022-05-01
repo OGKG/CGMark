@@ -11,6 +11,26 @@ class PointList(BaseModel):
     points: list[Point] = []
 
 
+class Vertex(BaseModel):
+    point: Point = None
+
+
+class Edge(BaseModel):
+    v1: Vertex = None
+    v2: Vertex = None
+    weight: int = 0
+
+
+class Graph(BaseModel):
+    vertices: set = set()
+    edges: set = set()
+
+
+class Region(BaseModel):
+    x_range: tuple[int, int] = (0, 0)
+    y_range: tuple[int, int] = (0, 0)
+
+
 class TableCell(BaseModel):
     content: Any
 
