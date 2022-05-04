@@ -25,6 +25,3 @@ class PointListCondition(Condition):
 class PointListAndRegionCondition(PointListCondition):
     region_x_range: tuple[float, float] = (0.0, 0.0)
     region_y_range: tuple[float, float] = (0.0, 0.0)
-
-    class Config:
-        arbitrary_types_allowed = True

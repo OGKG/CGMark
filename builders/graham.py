@@ -1,5 +1,5 @@
 from base.builder import ModelBuilder
-from base.models.graham import GrahamCenterPointCell, GrahamPiCompareCell, GrahamPoint, GrahamPointList, GrahamTable, GrahamTableRow, GrahamToAddCell, GrahamTrinityCell, PiCompare, ToAdd
+from base.models.graham import GrahamCenterPointCell, GrahamPiCompareCell, GrahamPoint, GrahamPointList, GrahamTable, GrahamTableRow, GrahamToAddCell, GrahamTrinityCell, PiCompare, ToAddGraham
 
 
 class GrahamModelBuilder(ModelBuilder):
@@ -28,7 +28,7 @@ class GrahamModelBuilder(ModelBuilder):
     @staticmethod
     def _build_steps_table(answer):
         pi_compare = lambda x: PiCompare.less if x else PiCompare.more
-        to_add = lambda x: ToAdd.yes if x else ToAdd.no
+        to_add = lambda x: ToAddGraham.yes if x else ToAddGraham.no
         rows = [
             GrahamTableRow(cells=(
                 GrahamTrinityCell(content=tuple(GrahamPoint(x=p.x, y=p.y) for p in row[0])),

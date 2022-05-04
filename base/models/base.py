@@ -26,6 +26,10 @@ class Graph(BaseModel):
     edges: set = set()
 
 
+class BinTree(BaseModel):
+    nodes: list[Point]
+
+
 class Region(BaseModel):
     x_range: tuple[int, int] = (0, 0)
     y_range: tuple[int, int] = (0, 0)

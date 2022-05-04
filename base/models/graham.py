@@ -24,16 +24,16 @@ class GrahamPiCompareCell(TableCell):
 
 
 class GrahamCenterPointCell(TableCell):
-    content: Point
+    content: GrahamPoint
 
 
-class ToAdd(Enum):
+class ToAddGraham(Enum):
     yes = auto()
     no = auto()
 
 
 class GrahamToAddCell(TableCell):
-    content: ToAdd
+    content: ToAddGraham
 
 
 class GrahamTableRow(TableRow):
