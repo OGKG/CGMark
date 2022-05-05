@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Any
+from typing import Any, Optional
 
 
 class Point(BaseModel):
@@ -26,8 +26,15 @@ class Graph(BaseModel):
     edges: set = set()
 
 
+class BinTreeNode(BaseModel):
+    data: Point
+    left: Optional[Point]
+    right: Optional[Point]
+
+
 class BinTree(BaseModel):
-    nodes: list[Point]
+    """Binary tree model represented as left-to-right list of nodes."""
+    nodes: list[BinTreeNode]
 
 
 class Region(BaseModel):

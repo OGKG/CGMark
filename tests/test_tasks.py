@@ -1,6 +1,6 @@
 from unittest import TestCase
 from CGLib.models.point import Point
-from base.models.base import Region
+from base.models.base import BinTreeNode, Region
 from base.models.condition import PointListAndRegionCondition, PointListCondition
 from base.models.graham import GrahamCenterPointCell, GrahamPiCompareCell, GrahamPoint, GrahamPointList, GrahamTable, GrahamTableRow, GrahamToAddCell, GrahamTrinityCell, PiCompare, ToAddGraham
 from base.models.kd_tree import Intersection, KdTree, KdTreeInterscetionCell, KdTreeOrderedList, KdTreePartitionCell, KdTreePartitionTable, KdTreePartitionTableRow, KdTreePoint, KdTreePointCell, KdTreeSearchTable, KdTreeSearchTableRow, KdTreeToAddCell, Partition, ToAddKdTree
@@ -121,11 +121,11 @@ class TestTasks(TestCase):
         ])
         tree = KdTree(
             nodes=[
-                ordered.points[2],
-                ordered.points[1],
-                ordered.points[0],
-                ordered.points[4],
-                ordered.points[3],
+                BinTreeNode(data=ordered.points[2], left=ordered.points[1], right=ordered.points[4]),
+                BinTreeNode(data=ordered.points[1], left=ordered.points[0], right=None),
+                BinTreeNode(data=ordered.points[0], left=None, right=None),
+                BinTreeNode(data=ordered.points[4], left=ordered.points[3], right=None),
+                BinTreeNode(data=ordered.points[3], left=None, right=None),
             ],
             region=Region(x_range=(2, 5), y_range=(2,4))
         )

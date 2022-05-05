@@ -1,5 +1,5 @@
 from base.builder import ModelBuilder
-from base.models.base import Point, Region
+from base.models.base import BinTreeNode, Point, Region
 from base.models.kd_tree import Intersection, KdTree, KdTreeInterscetionCell, KdTreeOrderedList, KdTreePartitionCell, KdTreePartitionTableRow, KdTreePoint, KdTreePartitionTable, KdTreePointCell, KdTreeSearchTable, KdTreeSearchTableRow, KdTreeToAddCell, Partition, ToAddKdTree
 
 
@@ -34,7 +34,14 @@ class KdTreeModelBuilder(ModelBuilder):
     @staticmethod
     def _build_tree(answer):
         return KdTree(
-            nodes=[Point(x=p.x, y=p.y) for p in answer.nodes],
+            nodes=[
+                BinTreeNode(
+                    data=Point(x=node[0].x, y=node[0].y),
+                    left=Point(x=node[1].x, y=node[1].y) if node[1] else None,
+                    right=Point(x=node[2].x, y=node[2].y) if node[2] else None
+                )
+                for node in answer.nodes
+            ],
             region=Region(x_range=answer.x_range, y_range=answer.y_range)
         )
     
