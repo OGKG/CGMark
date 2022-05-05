@@ -27,9 +27,9 @@ class Graph(BaseModel):
 
 
 class BinTreeNode(BaseModel):
-    data: Point
-    left: Optional[Point]
-    right: Optional[Point]
+    data: Any
+    left: Optional[Any]
+    right: Optional[Any]
 
 
 class BinTree(BaseModel):
