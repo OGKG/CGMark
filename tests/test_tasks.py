@@ -30,45 +30,45 @@ class TestTasks(TestCase):
         origin = GrahamPoint(x=1, y=0)
         steps = GrahamTable(rows=[
             GrahamTableRow(cells=(
-                GrahamTrinityCell(content=(ordered[0], ordered[1], ordered[2])),
+                GrahamTrinityCell(content=(ordered.points[0], ordered.points[1], ordered.points[2])),
                 GrahamPiCompareCell(content=PiCompare.less),
-                GrahamCenterPointCell(content=ordered[1]),
+                GrahamCenterPointCell(content=ordered.points[1]),
                 GrahamToAddCell(content=ToAddGraham.yes)
             )),
             GrahamTableRow(cells=(
-                GrahamTrinityCell(content=(ordered[1], ordered[2], ordered[3])),
+                GrahamTrinityCell(content=(ordered.points[1], ordered.points[2], ordered.points[3])),
                 GrahamPiCompareCell(content=PiCompare.less),
-                GrahamCenterPointCell(content=ordered[2]),
+                GrahamCenterPointCell(content=ordered.points[2]),
                 GrahamToAddCell(content=ToAddGraham.yes)
             )),
             GrahamTableRow(cells=(
-                GrahamTrinityCell(content=(ordered[2], ordered[3], ordered[4])),
+                GrahamTrinityCell(content=(ordered.points[2], ordered.points[3], ordered.points[4])),
                 GrahamPiCompareCell(content=PiCompare.less),
-                GrahamCenterPointCell(content=ordered[3]),
+                GrahamCenterPointCell(content=ordered.points[3]),
                 GrahamToAddCell(content=ToAddGraham.yes)
             )),
             GrahamTableRow(cells=(
-                GrahamTrinityCell(content=(ordered[3], ordered[4], ordered[5])),
+                GrahamTrinityCell(content=(ordered.points[3], ordered.points[4], ordered.points[5])),
                 GrahamPiCompareCell(content=PiCompare.more),
-                GrahamCenterPointCell(content=ordered[4]),
+                GrahamCenterPointCell(content=ordered.points[4]),
                 GrahamToAddCell(content=ToAddGraham.no)
             )),
             GrahamTableRow(cells=(
-                GrahamTrinityCell(content=(ordered[2], ordered[3], ordered[5])),
+                GrahamTrinityCell(content=(ordered.points[2], ordered.points[3], ordered.points[5])),
                 GrahamPiCompareCell(content=PiCompare.less),
-                GrahamCenterPointCell(content=ordered[3]),
+                GrahamCenterPointCell(content=ordered.points[3]),
                 GrahamToAddCell(content=ToAddGraham.yes)
             )),
             GrahamTableRow(cells=(
-                GrahamTrinityCell(content=(ordered[3], ordered[5], ordered[0])),
+                GrahamTrinityCell(content=(ordered.points[3], ordered.points[5], ordered.points[0])),
                 GrahamPiCompareCell(content=PiCompare.more),
-                GrahamCenterPointCell(content=ordered[5]),
+                GrahamCenterPointCell(content=ordered.points[5]),
                 GrahamToAddCell(content=ToAddGraham.no)
             )),
             GrahamTableRow(cells=(
-                GrahamTrinityCell(content=(ordered[2], ordered[3], ordered[0])),
+                GrahamTrinityCell(content=(ordered.points[2], ordered.points[3], ordered.points[0])),
                 GrahamPiCompareCell(content=PiCompare.less),
-                GrahamCenterPointCell(content=ordered[3]),
+                GrahamCenterPointCell(content=ordered.points[3]),
                 GrahamToAddCell(content=ToAddGraham.yes)
             )),
         ])
