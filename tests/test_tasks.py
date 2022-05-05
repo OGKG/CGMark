@@ -3,7 +3,7 @@ from CGLib.models.point import Point
 from base.models.base import BinTreeNode, Region
 from base.models.condition import PointListAndRegionCondition, PointListCondition
 from base.models.graham import GrahamCenterPointCell, GrahamPiCompareCell, GrahamPoint, GrahamPointList, GrahamTable, GrahamTableRow, GrahamToAddCell, GrahamTrinityCell, PiCompare, ToAddGraham
-from base.models.kd_tree import Intersection, KdTree, KdTreeInterscetionCell, KdTreeOrderedList, KdTreePartitionCell, KdTreePartitionTable, KdTreePartitionTableRow, KdTreePoint, KdTreePointCell, KdTreeSearchTable, KdTreeSearchTableRow, KdTreeToAddCell, Partition, ToAddKdTree
+from base.models.kd_tree import Intersection, KdTree, KdTreeInterscetionCell, KdTreeOrderedLists, KdTreePartitionCell, KdTreePartitionTable, KdTreePartitionTableRow, KdTreePoint, KdTreePointCell, KdTreeSearchTable, KdTreeSearchTableRow, KdTreeToAddCell, Partition, ToAddKdTree
 from tasks.graham import GrahamTask
 from tasks.kd_tree import KdTreeTask
 
@@ -30,45 +30,45 @@ class TestTasks(TestCase):
         origin = GrahamPoint(x=1, y=0)
         steps = GrahamTable(rows=[
             GrahamTableRow(cells=(
-                GrahamTrinityCell(content=(ordered.points[0], ordered.points[1], ordered.points[2])),
+                GrahamTrinityCell(content=(ordered[0], ordered[1], ordered[2])),
                 GrahamPiCompareCell(content=PiCompare.less),
-                GrahamCenterPointCell(content=ordered.points[1]),
+                GrahamCenterPointCell(content=ordered[1]),
                 GrahamToAddCell(content=ToAddGraham.yes)
             )),
             GrahamTableRow(cells=(
-                GrahamTrinityCell(content=(ordered.points[1], ordered.points[2], ordered.points[3])),
+                GrahamTrinityCell(content=(ordered[1], ordered[2], ordered[3])),
                 GrahamPiCompareCell(content=PiCompare.less),
-                GrahamCenterPointCell(content=ordered.points[2]),
+                GrahamCenterPointCell(content=ordered[2]),
                 GrahamToAddCell(content=ToAddGraham.yes)
             )),
             GrahamTableRow(cells=(
-                GrahamTrinityCell(content=(ordered.points[2], ordered.points[3], ordered.points[4])),
+                GrahamTrinityCell(content=(ordered[2], ordered[3], ordered[4])),
                 GrahamPiCompareCell(content=PiCompare.less),
-                GrahamCenterPointCell(content=ordered.points[3]),
+                GrahamCenterPointCell(content=ordered[3]),
                 GrahamToAddCell(content=ToAddGraham.yes)
             )),
             GrahamTableRow(cells=(
-                GrahamTrinityCell(content=(ordered.points[3], ordered.points[4], ordered.points[5])),
+                GrahamTrinityCell(content=(ordered[3], ordered[4], ordered[5])),
                 GrahamPiCompareCell(content=PiCompare.more),
-                GrahamCenterPointCell(content=ordered.points[4]),
+                GrahamCenterPointCell(content=ordered[4]),
                 GrahamToAddCell(content=ToAddGraham.no)
             )),
             GrahamTableRow(cells=(
-                GrahamTrinityCell(content=(ordered.points[2], ordered.points[3], ordered.points[5])),
+                GrahamTrinityCell(content=(ordered[2], ordered[3], ordered[5])),
                 GrahamPiCompareCell(content=PiCompare.less),
-                GrahamCenterPointCell(content=ordered.points[3]),
+                GrahamCenterPointCell(content=ordered[3]),
                 GrahamToAddCell(content=ToAddGraham.yes)
             )),
             GrahamTableRow(cells=(
-                GrahamTrinityCell(content=(ordered.points[3], ordered.points[5], ordered.points[0])),
+                GrahamTrinityCell(content=(ordered[3], ordered[5], ordered[0])),
                 GrahamPiCompareCell(content=PiCompare.more),
-                GrahamCenterPointCell(content=ordered.points[5]),
+                GrahamCenterPointCell(content=ordered[5]),
                 GrahamToAddCell(content=ToAddGraham.no)
             )),
             GrahamTableRow(cells=(
-                GrahamTrinityCell(content=(ordered.points[2], ordered.points[3], ordered.points[0])),
+                GrahamTrinityCell(content=(ordered[2], ordered[3], ordered[0])),
                 GrahamPiCompareCell(content=PiCompare.less),
-                GrahamCenterPointCell(content=ordered.points[3]),
+                GrahamCenterPointCell(content=ordered[3]),
                 GrahamToAddCell(content=ToAddGraham.yes)
             )),
         ])
@@ -90,58 +90,67 @@ class TestTasks(TestCase):
             region_x_range=(2, 5),
             region_y_range=(2, 4)
         ))
-        ordered = KdTreeOrderedList(points=[
+
+        ordered_x = [
             KdTreePoint(x=3, y=2),
             KdTreePoint(x=4, y=3),
             KdTreePoint(x=5, y=1),
             KdTreePoint(x=6, y=2),
             KdTreePoint(x=7, y=3)
-        ])
+        ]
+        ordered_y = [
+            KdTreePoint(x=5, y=1),
+            KdTreePoint(x=3, y=2),
+            KdTreePoint(x=6, y=2),
+            KdTreePoint(x=4, y=3),
+            KdTreePoint(x=7, y=3)
+        ]
+        ordered = KdTreeOrderedLists(ordered_x=ordered_x, ordered_y=ordered_y)
         partition_table = KdTreePartitionTable(rows=[
             KdTreePartitionTableRow(cells=(
-                KdTreePointCell(content=ordered.points[2]),
+                KdTreePointCell(content=ordered_x[2]),
                 KdTreePartitionCell(content=Partition.vertical)
             )),
             KdTreePartitionTableRow(cells=(
-                KdTreePointCell(content=ordered.points[1]),
+                KdTreePointCell(content=ordered_x[1]),
                 KdTreePartitionCell(content=Partition.horizontal)
             )),
             KdTreePartitionTableRow(cells=(
-                KdTreePointCell(content=ordered.points[0]),
+                KdTreePointCell(content=ordered_x[0]),
                 KdTreePartitionCell(content=Partition.vertical)
             )),
             KdTreePartitionTableRow(cells=(
-                KdTreePointCell(content=ordered.points[4]),
+                KdTreePointCell(content=ordered_x[4]),
                 KdTreePartitionCell(content=Partition.horizontal)
             )),
             KdTreePartitionTableRow(cells=(
-                KdTreePointCell(content=ordered.points[3]),
+                KdTreePointCell(content=ordered_x[3]),
                 KdTreePartitionCell(content=Partition.vertical)
             )),
         ])
         tree = KdTree(
             nodes=[
-                BinTreeNode(data=ordered.points[2], left=ordered.points[1], right=ordered.points[4]),
-                BinTreeNode(data=ordered.points[1], left=ordered.points[0], right=None),
-                BinTreeNode(data=ordered.points[0], left=None, right=None),
-                BinTreeNode(data=ordered.points[4], left=ordered.points[3], right=None),
-                BinTreeNode(data=ordered.points[3], left=None, right=None),
+                BinTreeNode(data=ordered_x[2], left=ordered_x[1], right=ordered_x[4]),
+                BinTreeNode(data=ordered_x[1], left=ordered_x[0], right=None),
+                BinTreeNode(data=ordered_x[0], left=None, right=None),
+                BinTreeNode(data=ordered_x[4], left=ordered_x[3], right=None),
+                BinTreeNode(data=ordered_x[3], left=None, right=None),
             ],
             region=Region(x_range=(2, 5), y_range=(2,4))
         )
         search_table = KdTreeSearchTable(rows=[
             KdTreeSearchTableRow(cells=(
-                KdTreePointCell(content=ordered.points[2]),
+                KdTreePointCell(content=ordered_x[2]),
                 KdTreeToAddCell(content=ToAddKdTree.no),
                 KdTreeInterscetionCell(content=Intersection.yes)
             )),
             KdTreeSearchTableRow(cells=(
-                KdTreePointCell(content=ordered.points[1]),
+                KdTreePointCell(content=ordered_x[1]),
                 KdTreeToAddCell(content=ToAddKdTree.yes),
                 KdTreeInterscetionCell(content=Intersection.yes)
             )),
             KdTreeSearchTableRow(cells=(
-                KdTreePointCell(content=ordered.points[0]),
+                KdTreePointCell(content=ordered_x[0]),
                 KdTreeToAddCell(content=ToAddKdTree.yes),
                 KdTreeInterscetionCell(content=Intersection.yes)
             ))

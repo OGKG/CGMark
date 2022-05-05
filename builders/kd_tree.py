@@ -1,6 +1,6 @@
 from base.builder import ModelBuilder
 from base.models.base import BinTreeNode, Point, Region
-from base.models.kd_tree import Intersection, KdTree, KdTreeInterscetionCell, KdTreeOrderedList, KdTreePartitionCell, KdTreePartitionTableRow, KdTreePoint, KdTreePartitionTable, KdTreePointCell, KdTreeSearchTable, KdTreeSearchTableRow, KdTreeToAddCell, Partition, ToAddKdTree
+from base.models.kd_tree import Intersection, KdTree, KdTreeInterscetionCell, KdTreeOrderedLists, KdTreePartitionCell, KdTreePartitionTableRow, KdTreePoint, KdTreePartitionTable, KdTreePointCell, KdTreeSearchTable, KdTreeSearchTableRow, KdTreeToAddCell, Partition, ToAddKdTree
 
 
 class KdTreeModelBuilder(ModelBuilder):
@@ -16,7 +16,10 @@ class KdTreeModelBuilder(ModelBuilder):
     
     @staticmethod
     def _build_ordered_list(answer):
-        return KdTreeOrderedList(points=[KdTreePoint(x=p.x, y=p.y) for p in answer])
+        return KdTreeOrderedLists(
+            ordered_x=[KdTreePoint(x=p.x, y=p.y) for p in answer[0]],
+            ordered_y=[KdTreePoint(x=p.x, y=p.y) for p in answer[1]]
+        )
     
     @staticmethod
     def _build_partition_table(answer):

@@ -1,13 +1,16 @@
 from enum import Enum, auto
-from base.models.base import BinTree, HeaderTable, Point, PointList, Region, TableCell, TableRow
+
+from pydantic import BaseModel
+from base.models.base import BinTree, HeaderTable, Point, Region, TableCell, TableRow
 
 
 class KdTreePoint(Point):
     pass
 
 
-class KdTreeOrderedList(PointList):
-    pass
+class KdTreeOrderedLists(BaseModel):
+    ordered_x: list[KdTreePoint]
+    ordered_y: list[KdTreePoint]
 
 
 class KdTree(BinTree):
