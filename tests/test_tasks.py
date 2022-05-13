@@ -1,6 +1,5 @@
 from unittest import TestCase
-from CGLib.models.point import Point
-from base.models.base import BinTreeNode, Region
+from base.models.base import BinTreeNode, Region, Point
 from base.models.condition import PointListAndRegionCondition, PointListCondition
 from base.models.graham import GrahamCenterPointCell, GrahamPiCompareCell, GrahamPoint, GrahamPointList, GrahamTable, GrahamTableRow, GrahamToAddCell, GrahamTrinityCell, PiCompare, ToAddGraham
 from base.models.kd_tree import Intersection, KdTree, KdTreeInterscetionCell, KdTreeOrderedLists, KdTreePartitionCell, KdTreePartitionTable, KdTreePartitionTableRow, KdTreePoint, KdTreePointCell, KdTreeSearchTable, KdTreeSearchTableRow, KdTreeToAddCell, Partition, ToAddKdTree
@@ -11,12 +10,12 @@ from tasks.kd_tree import KdTreeTask
 class TestTasks(TestCase):
     def test_graham(self):
         task = GrahamTask(PointListCondition(point_list=[
-            Point(6,4),
-            Point(4,2),
-            Point(4,0),
-            Point(1,0),
-            Point(3,2),
-            Point(2,4)
+            Point(x=6, y=4),
+            Point(x=4, y=2),
+            Point(x=4, y=0),
+            Point(x=1, y=0),
+            Point(x=3, y=2),
+            Point(x=2, y=4)
         ]))
         centroid = GrahamPoint(x=4.666666666666667, y=2.0)
         ordered = GrahamPointList(points=[
@@ -81,11 +80,11 @@ class TestTasks(TestCase):
     def test_kd_tree(self):
         task = KdTreeTask(PointListAndRegionCondition(
             point_list=[
-                Point(3, 2),
-                Point(5, 1),
-                Point(4, 3),
-                Point(7, 3),
-                Point(6, 2)
+                Point(x=3, y=2),
+                Point(x=5, y=1),
+                Point(x=4, y=3),
+                Point(x=7, y=3),
+                Point(x=6, y=2)
             ],
             region_x_range=(2, 5),
             region_y_range=(2, 4)

@@ -1,10 +1,10 @@
-import base.models.graham as models
-from CGLib.algo.graham import graham
+from base.models import graham as models
 from base.task import Task
 from base.taskstage import TaskStage
 from base.taskitem import TaskItem
 from builders.graham import GrahamModelBuilder
-
+from CGLib.algo.graham import graham
+from CGLib.models.point import Point
 
 class GrahamItemInternalPoint(TaskItem):
     description = "Задана множина S із N точок на площині. Знайти внутрішню точку q."
@@ -65,4 +65,4 @@ class GrahamTask(Task):
 
     @property
     def unwrapped_condition(self):
-        return [self.condition.point_list]
+        return [Point(p.x, p.y) for p in self.condition.point_list]

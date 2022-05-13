@@ -1,9 +1,10 @@
 import base.models.kd_tree as models
-from CGLib.algo.kd_tree_method import kd_tree
 from base.task import Task
 from base.taskstage import TaskStage
 from base.taskitem import TaskItem
 from builders.kd_tree import KdTreeModelBuilder
+from CGLib.algo.kd_tree_method import kd_tree
+from CGLib.models.point import Point
 
 
 class KdTreeItemOrderedList(TaskItem):
@@ -62,7 +63,7 @@ class KdTreeTask(Task):
     @property
     def unwrapped_condition(self):
         return [
-            self.condition.point_list,
+            [Point(p.x, p.y) for p in self.condition.point_list],
             self.condition.region_x_range,
             self.condition.region_y_range
         ]
