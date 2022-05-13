@@ -65,4 +65,4 @@ class GrahamTask(Task):
 
     @property
     def unwrapped_condition(self):
-        return [Point(p.x, p.y) for p in self.condition.point_list]
+        return [[Point(p.x, p.y) for p in self.condition.point_list]]
