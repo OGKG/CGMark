@@ -38,8 +38,8 @@ class BinTree(BaseModel):
 
 
 class Region(BaseModel):
-    x_range: tuple[int, int] = (0, 0)
-    y_range: tuple[int, int] = (0, 0)
+    x_range: tuple[float, float] = (0, 0)
+    y_range: tuple[float, float] = (0, 0)
 
 
 class TableCell(BaseModel):
