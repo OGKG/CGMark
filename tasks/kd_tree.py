@@ -64,6 +64,6 @@ class KdTreeTask(Task):
     def unwrapped_condition(self):
         return [
             [Point(p.x, p.y) for p in self.condition.point_list],
-            self.condition.region_x_range,
-            self.condition.region_y_range
+            self.condition.region.x_range,
+            self.condition.region.y_range
         ]

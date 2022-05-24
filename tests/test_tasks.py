@@ -86,8 +86,7 @@ class TestTasks(TestCase):
                 Point(x=7, y=3),
                 Point(x=6, y=2)
             ],
-            region_x_range=(2, 5),
-            region_y_range=(2, 4)
+            region=Region(x_range=(2, 5), y_range=(2, 4))
         ))
 
         ordered_x = [
@@ -135,7 +134,7 @@ class TestTasks(TestCase):
                 BinTreeNode(data=ordered_x[4], left=ordered_x[3], right=None),
                 BinTreeNode(data=ordered_x[3], left=None, right=None),
             ],
-            region=Region(x_range=(2, 5), y_range=(2,4))
+            region=Region(x_range=(2, 5), y_range=(2, 4))
         )
         search_table = KdTreeSearchTable(rows=[
             KdTreeSearchTableRow(cells=(

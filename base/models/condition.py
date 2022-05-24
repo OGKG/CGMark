@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from base.models.base import Point, Graph
+from base.models.base import Point, Graph, Region
 
 
 class Condition(BaseModel):
@@ -16,5 +16,4 @@ class PointListCondition(Condition):
 
 
 class PointListAndRegionCondition(PointListCondition):
-    region_x_range: tuple[float, float] = (0.0, 0.0)
-    region_y_range: tuple[float, float] = (0.0, 0.0)
+    region: Region
