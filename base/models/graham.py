@@ -1,5 +1,5 @@
 from base.models.base import Point, HeaderTable, TableCell, TableRow, PointList
-from enum import Enum, auto
+from enum import Enum
 
 
 class GrahamPoint(Point):
@@ -14,9 +14,9 @@ class GrahamTrinityCell(TableCell):
     content: tuple[Point, Point, Point]
 
 
-class PiCompare(Enum):
-    less = auto()
-    more = auto()
+class PiCompare(str, Enum):
+    less = "less"
+    more = "more"
 
 
 class GrahamPiCompareCell(TableCell):
@@ -27,9 +27,9 @@ class GrahamCenterPointCell(TableCell):
     content: GrahamPoint
 
 
-class ToAddGraham(Enum):
-    yes = auto()
-    no = auto()
+class ToAddGraham(str, Enum):
+    yes = "yes"
+    no = "no"
 
 
 class GrahamToAddCell(TableCell):

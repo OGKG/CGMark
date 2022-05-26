@@ -20,5 +20,10 @@ class Task:
             in self.__class__.stages
         ]
 
-    def get_items(self) -> list[TaskItem]:
+    @property
+    def items(self) -> list[TaskItem]:
         return [item for stage in self.stages for item in stage.items]
+
+    @property
+    def answers(self):
+        return [item.answer for item in self.items]
