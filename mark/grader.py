@@ -5,14 +5,21 @@ from itertools import cycle
 
 
 def default_grading(correct, answer, sub=0):
-    if correct == answer: return []
-    return [Mistake(sub=sub, data="Answer is not correct!")]
+    return [] if correct == answer else [Mistake(sub=sub)]
+
+
+def iterable_grading(correct: Iterable, answer: Iterable, sub=0, cum_sub=0):
+    return [
+        Mistake(sub=sub, cum_sub=cum_sub, cumulative=cum_sub>0)
+        for pair in zip(correct, answer)
+        if pair[0] != pair[1]
+    ]
 
 
 def mistakes_sub_pairs(mistakes):
     counter = Counter(mistakes)
     return {
-        mistake: (count if mistake.cumulative else 1) * mistake.sub
+        mistake: mistake.cum_sub if mistake.cumulative and count > 1 else mistake.sub
         for mistake, count
         in counter.items()
     }
@@ -21,7 +28,6 @@ def mistakes_sub_pairs(mistakes):
 class Grader:
     markdata: MarkData
     stage_grading_methods: Iterable[Callable] = cycle([default_grading])
-
 
     @classmethod
     def grade(cls, correct, answer):

@@ -5,8 +5,9 @@ from typing import Any
 
 class Mistake(BaseModel):
     sub: float
+    cum_sub: float = 0
     data: Any
-    cumulative: bool = True
+    cumulative: bool = False
 
     def __hash__(self):  # make hashable BaseModel subclass
         return hash((type(self),) + tuple(self.__dict__.values()))
