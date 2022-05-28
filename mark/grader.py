@@ -4,11 +4,11 @@ from collections import Counter
 from itertools import cycle
 
 
-def default_grading(correct, answer, sub=0):
+def default_grading(correct, answer, sub=0.0):
     return [] if correct == answer else [Mistake(sub=sub)]
 
 
-def iterable_grading(correct: Iterable, answer: Iterable, sub=0, cum_sub=0):
+def iterable_grading(correct: Iterable, answer: Iterable, sub=0.0, cum_sub=0.0):
     return [
         Mistake(sub=sub, cum_sub=cum_sub, cumulative=cum_sub>0)
         for pair in zip(correct, answer)
