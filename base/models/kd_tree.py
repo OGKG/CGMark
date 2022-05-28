@@ -1,5 +1,4 @@
 from enum import Enum, auto
-
 from pydantic import BaseModel
 from base.models.base import BinTree, HeaderTable, Point, Region, TableCell, TableRow
 

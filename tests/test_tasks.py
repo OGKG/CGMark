@@ -3,8 +3,10 @@ from base.models.base import BinTreeNode, Region, Point
 from base.models.condition import PointListAndRegionCondition, PointListCondition
 from base.models.graham import GrahamCenterPointCell, GrahamPiCompareCell, GrahamPoint, GrahamPointList, GrahamTable, GrahamTableRow, GrahamToAddCell, GrahamTrinityCell, PiCompare, ToAddGraham
 from base.models.kd_tree import Intersection, KdTree, KdTreeInterscetionCell, KdTreeOrderedLists, KdTreePartitionCell, KdTreePartitionTable, KdTreePartitionTableRow, KdTreePoint, KdTreePointCell, KdTreeSearchTable, KdTreeSearchTableRow, KdTreeToAddCell, Partition, ToAddKdTree
+from base.models.quickhull import QuickhullInitialPartition, QuickhullNodeData, QuickhullPartition, QuickhullPoint, QuickhullTree, QuickhullTreeNode
 from tasks.graham import GrahamTask
 from tasks.kd_tree import KdTreeTask
+from tasks.quickhull import QuickhullTask
 
 
 class TestTasks(TestCase):
@@ -158,3 +160,44 @@ class TestTasks(TestCase):
         self.assertEqual(task.stages[0].items[1].answer, partition_table)
         self.assertEqual(task.stages[1].items[0].answer, tree)
         self.assertEqual(task.stages[2].items[0].answer, search_table)
+    
+    def test_quickhull(self):
+        pts = [QuickhullPoint(x=3, y=4), QuickhullPoint(x=0, y=0), QuickhullPoint(x=7, y=2)]
+        task = QuickhullTask(PointListCondition(point_list=pts))
+        
+        min_point, max_point = pts[1], pts[2]
+        s1, s2 = [pts[1], pts[0], pts[2]], [pts[2], pts[1]]
+        s11, s12 = [pts[1], pts[0]], [pts[0], pts[2]]
+
+        tree = QuickhullTree(nodes=[
+            QuickhullTreeNode(
+                data=QuickhullNodeData(points=s1, hull_piece=s1),
+                left=QuickhullNodeData(points=s1, h=pts[0], hull_piece=s1),
+                right=QuickhullNodeData(points=s2, hull_piece=s2)
+            ),
+            QuickhullTreeNode(
+                data=QuickhullNodeData(points=s1, h=pts[0], hull_piece=s1),
+                left=QuickhullNodeData(points=s11, hull_piece=s11),
+                right=QuickhullNodeData(points=s12, hull_piece=s12)
+            ),
+            QuickhullTreeNode(
+                data=QuickhullNodeData(points=s11, hull_piece=s11)
+            ),
+            QuickhullTreeNode(
+                data=QuickhullNodeData(points=s12, hull_piece=s12)
+            ),
+            QuickhullTreeNode(
+                data=QuickhullNodeData(points=s2, hull_piece=s2)
+            )
+        ])
+
+        initial_partition = QuickhullInitialPartition(
+            min_point=min_point,
+            max_point=max_point,
+            s1=s1,
+            s2=s2
+        )
+        partition = QuickhullPartition(initial_partition=initial_partition, tree=tree)
+
+        self.assertEqual(task.stages[0].items[0].answer, partition)
+        self.assertEqual(task.stages[1].items[0].answer, tree)
