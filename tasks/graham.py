@@ -9,7 +9,6 @@ from CGLib.models.point import Point
 class GrahamItemInternalPoint(TaskItem):
     description = "Задана множина S із N точок на площині. Знайти внутрішню точку q."
     solution_method = graham
-    max_mark = 0.25
     data_model = models.GrahamPoint
 
 
@@ -21,7 +20,6 @@ class GrahamStageInternalPoint(TaskStage):
 class GrahamItemOrderedList(TaskItem):
     description = "Використовуючи q як початок координат, побудувати упорядкований за полярним кутом список точок множини S, починаючи із точки \"початок\" проти годинникової стрілки."
     solution_method = graham
-    max_mark = 0.25
     data_model = models.GrahamPointList
 
 
@@ -33,7 +31,6 @@ class GrahamStageOrderedList(TaskStage):
 class GrahamItemOriginPoint(TaskItem):
     description = "Знайти точку \"початок\"."
     solution_method = graham
-    max_mark = 0.25
     data_model = models.GrahamPoint    
 
 class GrahamStageOriginPoint(TaskStage):

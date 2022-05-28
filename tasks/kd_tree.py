@@ -10,14 +10,12 @@ from CGLib.models.point import Point
 class KdTreeItemOrderedList(TaskItem):
     description = "Побудувати відсортований по X список."
     solution_method = kd_tree
-    max_mark = 0.25
     data_model = models.KdTreePoint
 
 
 class KdTreeItemPartition(TaskItem):
     description = "Рекурсивно розбити площину на прямокутники."
     solution_method = kd_tree
-    max_mark = 0.75
     data_model = models.KdTreePartitionTable
 
 
@@ -29,7 +27,6 @@ class KdTreeStagePreprocessing(TaskStage):
 class KdTreeItemTree(TaskItem):
     description = "Побудувати дерево пошуку."
     solution_method = kd_tree
-    max_mark = 1.0
     data_model = models.KdTree
 
 
@@ -41,7 +38,6 @@ class KdTreeStageTree(TaskStage):
 class KdTreeItemSearch(TaskItem):
     description = "Здійснити пошук у дереві."
     solution_method = kd_tree
-    max_mark = 1.0
     data_model = models.KdTreeSearchTable
 
 
