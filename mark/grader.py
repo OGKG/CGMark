@@ -9,11 +9,20 @@ def default_grading(correct, answer, sub=0.0):
 
 
 def iterable_grading(correct: Iterable, answer: Iterable, sub=0.0, cum_sub=0.0):
+    diff = len(correct) - len(answer)
+    extra = [
+        Mistake(sub=sub, cum_sub=cum_sub, data="Too many items")
+        for _ in range(-diff)
+    ] if diff < 0 else [
+        Mistake(sub=sub, cum_sub=cum_sub, data="Too few items")
+        for _ in range(diff)
+    ]
+
     return [
         Mistake(sub=sub, cum_sub=cum_sub, cumulative=cum_sub>0)
         for pair in zip(correct, answer)
         if pair[0] != pair[1]
-    ]
+    ] + extra
 
 
 def mistakes_sub_pairs(mistakes):

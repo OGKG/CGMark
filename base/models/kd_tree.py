@@ -16,19 +16,19 @@ class KdTree(BinTree):
     region: Region
 
 
-class Partition(Enum):
-    vertical = auto()
-    horizontal = auto()
+class Partition(str, Enum):
+    vertical = "vertical"
+    horizontal = "horizontal"
 
 
-class ToAddKdTree(Enum):
-    yes = auto()
-    no = auto()
+class ToAddKdTree(str, Enum):
+    yes = "yes"
+    no = "no"
 
 
-class Intersection(Enum):
-    yes = auto()
-    no = auto()
+class Intersection(str, Enum):
+    yes = "yes"
+    no = "no"
 
 
 class KdTreePointCell(TableCell):
@@ -58,6 +58,11 @@ class KdTreeSearchTableRow(TableRow):
 class KdTreePartitionTable(HeaderTable):
     rows: list[KdTreePartitionTableRow]
     headers: tuple[str, str] = ('', '')
+
+
+class KdTreePreprocessing(BaseModel):
+    ordered: KdTreeOrderedLists
+    
 
 
 class KdTreeSearchTable(HeaderTable):

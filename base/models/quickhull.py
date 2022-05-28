@@ -29,6 +29,10 @@ class QuickhullTreeNode(BinTreeNode):
 class QuickhullTree(BinTree):
     nodes: list[QuickhullTreeNode]
 
+    @property
+    def leaves(self):
+        return [n for n in self.nodes if n.left is None and n.right is None]
+
 
 class QuickhullPartition(BaseModel):
     initial_partition: QuickhullInitialPartition

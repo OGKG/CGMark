@@ -126,7 +126,7 @@ class TestTasks(TestCase):
             KdTreePartitionTableRow(cells=(
                 KdTreePointCell(content=ordered_x[3]),
                 KdTreePartitionCell(content=Partition.vertical)
-            )),
+            ))
         ])
         tree = KdTree(
             nodes=[
