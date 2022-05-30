@@ -53,7 +53,7 @@ def steps_table_grading(correct: GrahamTable, answer: GrahamTable):
     mistakes.extend(iterable_grading(correct_triples, answer_triples, sub=0.15))
     mistakes.extend(iterable_grading(correct_angles, answer_angles, sub=0.15))
     mistakes.extend(iterable_grading(correct_less_than_pi, answer_less_than_pi, sub=0.25))
-    mistakes.extend(iterable_grading(correct_more_than_pi, answer_more_than_pi, sub=0.3, cum_sub=0.6))
+    mistakes.extend(iterable_grading(correct_more_than_pi, answer_more_than_pi, sub=0.3, big_sub=0.6))
     mistakes.extend(mistakes_last)
 
     return mistakes

@@ -35,7 +35,7 @@ def grade_partition(correct: QuickhullPartition, answer: QuickhullPartition):
     ]
 
     mistakes.extend(default025(correct_extreme_points, answer_extreme_points))
-    mistakes.extend(iterable025(correct_h_points, answer_h_points, cum_sub=0.5))
+    mistakes.extend(iterable025(correct_h_points, answer_h_points, big_sub=0.5))
     mistakes.extend(iterable025(correct_points, answer_points))
     mistakes.extend(iterable025(correct.tree.leaves, answer.tree.leaves))
 

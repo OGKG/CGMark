@@ -8,18 +8,18 @@ def default_grading(correct, answer, sub=0.0):
     return [] if correct == answer else [Mistake(sub=sub)]
 
 
-def iterable_grading(correct: Iterable, answer: Iterable, sub=0.0, cum_sub=0.0):
+def iterable_grading(correct: Iterable, answer: Iterable, sub=0.0, big_sub=0.0):
     diff = len(correct) - len(answer)
     extra = [
-        Mistake(sub=sub, cum_sub=cum_sub, data="Too many items")
+        Mistake(sub=sub, big_sub=big_sub, data="Too many items")
         for _ in range(-diff)
     ] if diff < 0 else [
-        Mistake(sub=sub, cum_sub=cum_sub, data="Too few items")
+        Mistake(sub=sub, big_sub=big_sub, data="Too few items")
         for _ in range(diff)
     ]
 
     return [
-        Mistake(sub=sub, cum_sub=cum_sub, cumulative=cum_sub>0)
+        Mistake(sub=sub, big_sub=big_sub, systematic=big_sub>0)
         for pair in zip(correct, answer)
         if pair[0] != pair[1]
     ] + extra
@@ -28,7 +28,7 @@ def iterable_grading(correct: Iterable, answer: Iterable, sub=0.0, cum_sub=0.0):
 def mistakes_sub_pairs(mistakes):
     counter = Counter(mistakes)
     return {
-        mistake: mistake.cum_sub if mistake.cumulative and count > 1 else mistake.sub
+        mistake: mistake.big_sub if mistake.systematic and count > 1 else mistake.sub
         for mistake, count
         in counter.items()
     }
