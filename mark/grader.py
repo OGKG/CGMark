@@ -9,13 +9,6 @@ def default_grading(correct, answer, sub=0.0):
     return [] if correct == answer else [Mistake(sub=sub)]
 
 
-def point_grading(correct, answer, sub=0.0, big_sub=0.0):
-    return (
-        [] if isclose(correct.x, answer.x, abs_tol=1e-3) and isclose(correct.y, answer.y, abs_tol=1e-3)
-        else [Mistake(sub=sub, big_sub=big_sub, systematic=big_sub>0)]
-    )
-
-
 def iterable_grading(correct: Iterable, answer: Iterable, sub=0.0, big_sub=0.0, item_grading=default_grading):
     diff = len(correct) - len(answer)
     extra = [

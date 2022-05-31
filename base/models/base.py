@@ -1,3 +1,4 @@
+from math import isclose
 from pydantic import BaseModel
 from typing import Any, Optional
 
@@ -5,6 +6,13 @@ from typing import Any, Optional
 class Point(BaseModel):
     x: float = 0
     y: float = 0
+
+    def __eq__(self, other: Any) -> bool:
+        return (
+            isinstance(other, Point) and
+            isclose(self.x, other.x, abs_tol=1e-3) and
+            isclose(self.y, other.y, abs_tol=1e-3)
+        )
 
 
 class PointList(BaseModel):
