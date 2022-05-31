@@ -6,7 +6,10 @@ class Mistake(BaseModel):
     sub: float
     big_sub: float = 0
     data: Any
-    systematic: bool = False
+
+    @property
+    def systematic(self):
+        return self.big_sub > 0
 
     def __hash__(self):  # make hashable BaseModel subclass
         return hash((type(self),) + tuple(self.__dict__.values()))
