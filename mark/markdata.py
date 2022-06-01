@@ -15,7 +15,7 @@ class Mistake(BaseModel):
         return hash((type(self),) + tuple(self.__dict__.values()))
 
 
-class StageMarkData(BaseModel):
+class ItemMarkData(BaseModel):
     max_mark: float
     min_mark: float = 0
 
@@ -24,4 +24,4 @@ class StageMarkData(BaseModel):
 
 
 class MarkData(BaseModel):
-    stages: list[StageMarkData] = []
+    items: list[ItemMarkData] = []

@@ -3,7 +3,7 @@ from base.models.base import BinTreeNode, Point, PointList, Region
 from base.models.graham import GrahamCenterPointCell, GrahamPiCompareCell, GrahamTable, GrahamTableRow, GrahamToAddCell, GrahamTrinityCell, PiCompare, ToAddGraham
 from base.models.kd_tree import Intersection, KdTree, KdTreeInterscetionCell, KdTreeOrderedLists, KdTreePartitionCell, KdTreePartitionTable, KdTreePartitionTableRow, KdTreePoint, KdTreePointCell, KdTreeSearchTable, KdTreeSearchTableRow, KdTreeToAddCell, Partition, ToAddKdTree
 from base.models.quickhull import QuickhullInitialPartition, QuickhullNodeData, QuickhullPartition, QuickhullPoint, QuickhullTree, QuickhullTreeNode
-from mark.graders.graham import GrahamGrader, StageMarkData
+from mark.graders.graham import GrahamGrader, ItemMarkData
 from mark.graders.kd_tree import KdTreeGrader
 from mark.graders.quickhull import QuickhullGrader
 
@@ -59,10 +59,10 @@ class TestGraders(TestCase):
         mark = GrahamGrader.grade(correct, answer)
         self.assertEqual(mark[0], 1.75)
         markdata = [
-            (StageMarkData(max_mark=0.25, min_mark=0), 0.25), 
-            (StageMarkData(max_mark=0.25, min_mark=0), 0.25), 
-            (StageMarkData(max_mark=0.25, min_mark=0), 0.25), 
-            (StageMarkData(max_mark=1.25, min_mark=0), 1.0)
+            (ItemMarkData(max_mark=0.25, min_mark=0), 0.25), 
+            (ItemMarkData(max_mark=0.25, min_mark=0), 0.25), 
+            (ItemMarkData(max_mark=0.25, min_mark=0), 0.25), 
+            (ItemMarkData(max_mark=1.25, min_mark=0), 1.0)
         ]
         self.assertEqual(mark[1], markdata)
     
@@ -129,8 +129,8 @@ class TestGraders(TestCase):
         mark = QuickhullGrader.grade(correct, answer)
         self.assertEqual(mark[0], 1.0)
         markdata = [
-            (StageMarkData(max_mark=1.0, min_mark=0), 1.0),
-            (StageMarkData(max_mark=1.0, min_mark=0), 0.0)
+            (ItemMarkData(max_mark=1.0, min_mark=0), 1.0),
+            (ItemMarkData(max_mark=1.0, min_mark=0), 0.0)
         ]
         self.assertEqual(mark[1], markdata)
     
@@ -230,9 +230,9 @@ class TestGraders(TestCase):
         mark = KdTreeGrader.grade(correct, answer)
         self.assertEqual(mark[0], 2.25)
         markdata = [
-            (StageMarkData(max_mark=0.25, min_mark=0), 0.25),
-            (StageMarkData(max_mark=0.75, min_mark=0), 0.0),
-            (StageMarkData(max_mark=1.0, min_mark=0), 1.0),
-            (StageMarkData(max_mark=1.0, min_mark=0), 1.0)
+            (ItemMarkData(max_mark=0.25, min_mark=0), 0.25),
+            (ItemMarkData(max_mark=0.75, min_mark=0), 0.0),
+            (ItemMarkData(max_mark=1.0, min_mark=0), 1.0),
+            (ItemMarkData(max_mark=1.0, min_mark=0), 1.0)
         ]
         self.assertEqual(mark[1], markdata)

@@ -1,7 +1,7 @@
 from functools import partial
 from base.models.quickhull import QuickhullPartition, QuickhullTree
 from mark.grader import Grader, default_grading, iterable_grading
-from mark.markdata import MarkData, StageMarkData
+from mark.markdata import MarkData, ItemMarkData
 
 
 default025 = partial(default_grading, sub=0.25)
@@ -45,10 +45,10 @@ def grade_merge(correct: QuickhullTree, answer: QuickhullTree):
     )
 
 
-partition = StageMarkData(max_mark=1.0)
-merge = StageMarkData(max_mark=1.0)
+partition = ItemMarkData(max_mark=1.0)
+merge = ItemMarkData(max_mark=1.0)
 
 
 class QuickhullGrader(Grader):
-    markdata = MarkData(stages=[partition, merge])
-    stage_grading_methods = [grade_partition, grade_merge]
+    markdata = MarkData(items=[partition, merge])
+    item_grading_methods = [grade_partition, grade_merge]

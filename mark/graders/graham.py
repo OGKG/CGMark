@@ -1,6 +1,6 @@
 from base.models.graham import GrahamPointList, GrahamTable
 from mark.grader import Grader, default_grading, iterable_grading
-from mark.markdata import MarkData, StageMarkData, Mistake
+from mark.markdata import MarkData, ItemMarkData, Mistake
 from functools import partial
 
 
@@ -59,12 +59,12 @@ def steps_table_grading(correct: GrahamTable, answer: GrahamTable):
     return mistakes
 
 
-internal_point = StageMarkData(max_mark=0.25)
-ordered = StageMarkData(max_mark=0.25)
-origin = StageMarkData(max_mark=0.25)
-steps_table = StageMarkData(max_mark=1.25)
+internal_point = ItemMarkData(max_mark=0.25)
+ordered = ItemMarkData(max_mark=0.25)
+origin = ItemMarkData(max_mark=0.25)
+steps_table = ItemMarkData(max_mark=1.25)
 
 
 class GrahamGrader(Grader):
-    markdata = MarkData(stages=[internal_point, ordered, origin, steps_table])
-    stage_grading_methods = [default025, ordered_grading, default025, steps_table_grading]
+    markdata = MarkData(items=[internal_point, ordered, origin, steps_table])
+    item_grading_methods = [default025, ordered_grading, default025, steps_table_grading]

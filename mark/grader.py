@@ -1,4 +1,3 @@
-from math import isclose
 from typing import Callable, Iterable
 from collections import Counter
 from itertools import cycle
@@ -37,30 +36,30 @@ def mistakes_sub_pairs(mistakes):
 
 class Grader:
     markdata: MarkData
-    stage_grading_methods: Iterable[Callable] = cycle([default_grading])
+    item_grading_methods: Iterable[Callable] = cycle([default_grading])
 
     @classmethod
     def grade(cls, correct, answer):
         mistakes = [
             method(correct_stage, answer_stage)
             for method, correct_stage, answer_stage 
-            in zip(cls.stage_grading_methods, correct, answer)
+            in zip(cls.item_grading_methods, correct, answer)
         ]
 
-        by_stages = list(zip(cls.markdata.stages, mistakes))
+        by_items = list(zip(cls.markdata.items, mistakes))
 
-        by_stages_counter = [
+        by_items_counter = [
             (stage, mistakes_sub_pairs(mistakes))
             for stage, mistakes
-            in by_stages
+            in by_items
         ]
 
-        marks_per_stage = [
-            (stage, max(stage.min_mark, stage.max_mark - sum(counter.values())))
-            for stage, counter
-            in by_stages_counter
+        marks_per_item = [
+            (item, max(item.min_mark, item.max_mark - sum(counter.values())))
+            for item, counter
+            in by_items_counter
         ]
 
-        mark = sum(mark for stage, mark in marks_per_stage)
+        mark = sum(mark for item, mark in marks_per_item)
 
-        return mark, marks_per_stage
+        return mark, marks_per_item

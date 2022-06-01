@@ -1,7 +1,7 @@
 from functools import partial
 from base.models.kd_tree import KdTree, KdTreeOrderedLists, KdTreePartitionTable, KdTreeSearchTable
 from mark.grader import Grader, iterable_grading
-from mark.markdata import MarkData, Mistake, StageMarkData
+from mark.markdata import MarkData, Mistake, ItemMarkData
 
 
 iterable025 = partial(iterable_grading, sub=0.25)
@@ -27,15 +27,15 @@ def grade_search_table(correct: KdTreeSearchTable, answer: KdTreeSearchTable):
     return iterable1(correct.rows, answer.rows)
 
 
-ordered_lists = StageMarkData(max_mark=0.25)
-partition_table = StageMarkData(max_mark=0.75)
-search_tree = StageMarkData(max_mark=1)
-search_table = StageMarkData(max_mark=1)
+ordered_lists = ItemMarkData(max_mark=0.25)
+partition_table = ItemMarkData(max_mark=0.75)
+search_tree = ItemMarkData(max_mark=1)
+search_table = ItemMarkData(max_mark=1)
 
 
 class KdTreeGrader(Grader):
-    markdata = MarkData(stages=[ordered_lists, partition_table, search_tree, search_table])
-    stage_grading_methods = [
+    markdata = MarkData(items=[ordered_lists, partition_table, search_tree, search_table])
+    item_grading_methods = [
         grade_ordered_lists,
         grade_partition_table,
         grade_search_tree,
