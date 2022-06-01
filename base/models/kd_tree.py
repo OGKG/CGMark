@@ -57,12 +57,7 @@ class KdTreeSearchTableRow(TableRow):
 
 class KdTreePartitionTable(HeaderTable):
     rows: list[KdTreePartitionTableRow]
-    headers: tuple[str, str] = ('', '')
-
-
-class KdTreePreprocessing(BaseModel):
-    ordered: KdTreeOrderedLists
-    
+    headers: tuple[str, str] = ('', '')    
 
 
 class KdTreeSearchTable(HeaderTable):
