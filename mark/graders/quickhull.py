@@ -11,8 +11,6 @@ iterable1 = partial(iterable_grading, sub=1.0)
 
 def grade_partition(correct: QuickhullPartition, answer: QuickhullPartition):
     mistakes = []
-    correct_extreme_points = correct.initial_partition.min_point, correct.initial_partition.max_point
-    answer_extreme_points = answer.initial_partition.min_point, answer.initial_partition.max_point
     
     correct_h_points = [node.data.h for node in correct.tree.nodes if node.data.h is not None]
     answer_h_points = [node.data.h for node in answer.tree.nodes if node.data.h is not None]
@@ -34,7 +32,7 @@ def grade_partition(correct: QuickhullPartition, answer: QuickhullPartition):
         for node in answer.tree.nodes
     ]
 
-    mistakes.extend(default025(correct_extreme_points, answer_extreme_points))
+    mistakes.extend(default025(correct.initial_partition, answer.initial_partition))
     mistakes.extend(iterable025(correct_h_points, answer_h_points, big_sub=0.5))
     mistakes.extend(iterable025(correct_points, answer_points))
     mistakes.extend(iterable025(correct.tree.leaves, answer.tree.leaves))
