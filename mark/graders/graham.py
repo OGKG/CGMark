@@ -1,4 +1,4 @@
-from base.models.graham import GrahamPointList, GrahamTable
+from base.models.graham import GrahamPointList, GrahamTable, PiCompare
 from mark.grader import Grader, default_grading, iterable_grading
 from mark.markdata import MarkData, ItemMarkData, Mistake
 from functools import partial
@@ -23,26 +23,26 @@ def steps_table_grading(correct: GrahamTable, answer: GrahamTable):
     correct_triples = [row.cells[0] for row in correct.rows]
     answer_triples = [row.cells[0] for row in answer.rows]
     correct_angles = [row.cells[1] for row in correct.rows]
-    answer_angles = [row.cells[1] for row in correct.rows]
+    answer_angles = [row.cells[1] for row in answer.rows]
     correct_less_than_pi = [
         (row.cells[1], row.cells[3], correct.rows[i+1].cells[0])
         for i, row in enumerate(correct.rows[:-1])
-        if row.cells[1]
+        if row.cells[1].content == PiCompare.less
     ]
     answer_less_than_pi = [
         (row.cells[1], row.cells[3], correct.rows[i+1].cells[0])
-        for i, row in enumerate(correct.rows[:-1])
-        if row.cells[1]
+        for i, row in enumerate(answer.rows[:-1])
+        if row.cells[1].content == PiCompare.less
     ]
     correct_more_than_pi = [
         (row.cells[1], row.cells[3], correct.rows[i+1].cells[0])
         for i, row in enumerate(correct.rows[:-1])
-        if not row.cells[1]
+        if row.cells[1].content == PiCompare.more
     ]
     answer_more_than_pi = [
         (row.cells[1], row.cells[3], correct.rows[i+1].cells[0])
-        for i, row in enumerate(correct.rows[:-1])
-        if not row.cells[1]
+        for i, row in enumerate(answer.rows[:-1])
+        if row.cells[1].content == PiCompare.more
     ]
     mistakes_last = [
         Mistake(sub=0.25)
