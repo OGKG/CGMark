@@ -1,7 +1,7 @@
 from typing import Callable
-from base import TaskStage
-from base import TaskItem
-from base.models.condition import Condition
+from taskstage import TaskStage
+from taskitem import TaskItem
+from models.condition import Condition
 
 
 class Task:

@@ -1,5 +1,5 @@
 from typing import Callable
-from base.task import Task
+from task import Task
 
 
 class ModelBuilder:

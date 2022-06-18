@@ -1,7 +1,7 @@
 from typing import Callable, Iterable
 from collections import Counter
 from itertools import cycle
-from mark.markdata import MarkData, Mistake
+from markdata import MarkData, Mistake
 
 
 def default_grading(correct, answer, sub=0.0):

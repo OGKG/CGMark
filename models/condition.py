@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from base.models.base import Point, Graph, Region
+from models.base import Point, Graph, Region
 
 
 class Condition(BaseModel):

@@ -1,5 +1,5 @@
 from typing import Iterable
-from base import TaskItem
+from taskitem import TaskItem
 
 class TaskStage:
     description: str = ""
