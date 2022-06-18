@@ -1,3 +1,3 @@
-# CGMark aka PyMarkLib, lib for development a grading systems on algorithmic study tasks
+# CGMark aka PyMarkLib, lib for automated grading of algorithmic tasks
 ## Installation
 `pip install PyMarkLib`
