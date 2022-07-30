@@ -1,8 +1,7 @@
 from typing import Any
+from pydantic import BaseModel
 
 
-class TaskItem:
+class TaskItem(BaseModel):
     description: str = ""
-
-    def __init__(self, answer: Any):
-        self.answer = answer
+    answer: Any
