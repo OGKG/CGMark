@@ -1,5 +1,5 @@
 from typing import Callable
-from task import Task
+from MarkLib.task import Task
 
 
 class ModelBuilder:

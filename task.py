@@ -1,7 +1,7 @@
 from typing import Callable
-from taskstage import TaskStage
-from taskitem import TaskItem
-from models.condition import Condition
+from MarkLib.taskstage import TaskStage
+from MarkLib.taskitem import TaskItem
+from .models.condition import Condition
 
 
 class Task:
