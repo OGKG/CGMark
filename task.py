@@ -2,6 +2,7 @@ from typing import Callable
 from MarkLib.taskstage import TaskStage
 from MarkLib.taskitem import TaskItem
 from .models.condition import Condition
+from pydantic import create_model
 
 
 class Task:
@@ -27,3 +28,23 @@ class Task:
     @property
     def answers(self):
         return [item.answer for item in self.items]
+
+    @classmethod
+    def answer_schema(cls):
+        item_classes = [
+            item_class
+            for stage_class in cls.stages 
+            for item_class in stage_class.items
+        ]
+        item_dataclasses = [
+            item_class.__annotations__.get("answer", None) 
+            for item_class 
+            in item_classes
+        ]
+        d = {
+            item_class.__name__: (item_dataclass, None) 
+            for item_class, item_dataclass
+            in zip(item_classes, item_dataclasses)
+        }
+        return create_model(f"{cls.__name__}Model", **d).schema()
+
